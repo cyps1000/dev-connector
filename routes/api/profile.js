@@ -135,7 +135,7 @@ router.get("/", async (req, res) => {
  * @desc    Get profile by user id
  * @access  Public
  */
-router.get("/users/:user_id", async (req, res) => {
+router.get("/user/:user_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id,
@@ -331,9 +331,14 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
 router.get("/github/:username", (req, res) => {
   try {
     const options = {
-      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_SECRET}`,
+      uri: encodeURI(
+        `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
+      ),
       method: "GET",
-      headers: { "user-agent": "nodejs" },
+      headers: {
+        "user-agent": "nodejs",
+        Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      },
     };
 
     request(options, (error, response, body) => {
