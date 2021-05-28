@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { deleteEducation } from "../../actions/profile";
 
 const Education = ({ deleteEducation, education }) => {
+  if (!education) return null;
   const educations = education.map((edu) => (
     <tr key={edu._id}>
       <td>{edu.school}</td>
