@@ -1,10 +1,16 @@
-const express = require("express");
-const { config } = require("dotenv");
-
-const path = require("path");
+import express from "express";
+import { config } from "dotenv";
+import path from "path";
+import { connectDb } from "./config/db";
 
 /**
- * Creates the express app
+ * Imports routes
+ */
+import { authRouter } from "./routes/auth";
+import { postRouter } from "./routes/posts";
+
+/**
+ * Init the express app
  */
 const app = express();
 
@@ -14,32 +20,29 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 /**
- * Handles connecting to the db
- */
-const connectDB = require("./config/db");
-
-/**
  * Dot ENV Config
  */
 config();
 
 /**
- * Connect database
+ * Handles connecting to the db
  */
-connectDB();
+connectDb();
 
 /**
  * Init Middleware
  */
-app.use(express.json({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 /**
  * Define routes
  */
-app.use("/api/users", require("./routes/api/users"));
-app.use("/api/auth", require("./routes/api/auth"));
-app.use("/api/profile", require("./routes/api/profile"));
-app.use("/api/posts", require("./routes/api/posts"));
+app.use(authRouter);
+app.use(postRouter);
+
+// app.use("/api/profile", require("./routes/api/profile"));
+// app.use("/api/posts", require("./routes/api/posts"));
 
 /**
  * Serve static assets in production
