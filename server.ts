@@ -8,6 +8,7 @@ import { connectDb } from "./config/db";
  */
 import { authRouter } from "./routes/auth";
 import { postRouter } from "./routes/posts";
+import { profileRouter } from "./routes/profile";
 
 /**
  * Init the express app
@@ -40,9 +41,7 @@ app.use(express.urlencoded({ extended: true }));
  */
 app.use(authRouter);
 app.use(postRouter);
-
-// app.use("/api/profile", require("./routes/api/profile"));
-// app.use("/api/posts", require("./routes/api/posts"));
+app.use(profileRouter);
 
 /**
  * Serve static assets in production

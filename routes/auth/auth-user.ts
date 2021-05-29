@@ -1,7 +1,10 @@
 import { Request, Response, RequestHandler } from "express";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
+
+/**
+ * Imports Services
+ */
 import { PasswordManager } from "../../services/password-manager";
 
 /**
@@ -29,26 +32,38 @@ const loginUser = async (req: Request, res: Response) => {
 
   const { email, password } = req.body;
 
+  /**
+   * Checks if the user exists
+   */
   const user = await User.findOne({ email });
 
   if (!user) {
     return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] });
   }
 
+  /**
+   * Checks if the provided password is correct
+   */
   const passwordsMatch = await PasswordManager.compare(user.password, password);
 
   if (!passwordsMatch) {
     return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] });
   }
 
+  /**
+   * Defines the payload
+   */
   const payload = {
     id: user.id,
     name: user.name,
     avatar: user.avatar,
   };
 
+  /**
+   * Creates an access token
+   */
   const jwtToken = jwt.sign(payload, process.env.JWT_SECRET!, {
-    expiresIn: 36000000,
+    expiresIn: 3600,
   });
   res.status(201).send({ token: jwtToken, user });
 };

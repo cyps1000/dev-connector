@@ -1,36 +1,45 @@
 import mongoose from "mongoose";
 
 /**
+ * Defines the Experience interface
+ */
+export interface Experience {
+  _id?: string;
+  title: string;
+  company: string;
+  location: string;
+  from: Date;
+  to: Date;
+  current: boolean;
+  description: string;
+}
+
+export interface Education {
+  _id?: string;
+  school: string;
+  degree: string;
+  fieldofstudy: string;
+  from: Date;
+  to: Date;
+  current: boolean;
+  description: string;
+}
+
+/**
  * Defines the Profile interface
  */
-interface ProfileAttributes {
+export interface ProfileAttributes {
   user: string;
-  company: string;
-  website: string;
-  location: string;
+  company?: string;
+  website?: string;
+  location?: string;
   status: string;
   skills: string[];
   bio?: string;
   githubusername?: string;
-  experience: {
-    title: string;
-    company: string;
-    location: string;
-    from: Date;
-    to: Date;
-    current: boolean;
-    description: string;
-  }[];
-  education: {
-    school: string;
-    degree: string;
-    fieldofstudy: string;
-    from: Date;
-    to: Date;
-    current: boolean;
-    description: string;
-  }[];
-  social: {
+  experience?: Experience[];
+  education?: Education[];
+  social?: {
     youtube: string;
     twitter: string;
     facebook: string;
@@ -52,24 +61,8 @@ interface ProfileDocument extends mongoose.Document {
   skills: string[];
   bio: string;
   githubusername: string;
-  experience: {
-    title: string;
-    company: string;
-    location: string;
-    from: Date;
-    to: Date;
-    current: boolean;
-    description: string;
-  }[];
-  education: {
-    school: string;
-    degree: string;
-    fieldofstudy: string;
-    from: Date;
-    to: Date;
-    current: boolean;
-    description: string;
-  }[];
+  experience: Experience[];
+  education: Education[];
   social: {
     youtube: string;
     twitter: string;

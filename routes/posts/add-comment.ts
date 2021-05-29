@@ -1,5 +1,4 @@
 import { Request, Response, RequestHandler } from "express";
-import mongoose from "mongoose";
 import { check, validationResult } from "express-validator";
 import { auth } from "../../middleware/auth";
 
