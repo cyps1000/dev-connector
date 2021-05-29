@@ -42,13 +42,13 @@ const loginUser = async (req: Request, res: Response) => {
   }
 
   const payload = {
-    user: {
-      id: user.id,
-    },
+    id: user.id,
+    name: user.name,
+    avatar: user.avatar,
   };
 
   const jwtToken = jwt.sign(payload, process.env.JWT_SECRET!, {
-    expiresIn: 3600,
+    expiresIn: 36000000,
   });
   res.status(201).send({ token: jwtToken, user });
 };

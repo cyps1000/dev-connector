@@ -51,13 +51,13 @@ const registerUser = async (req: Request, res: Response) => {
   await user.save();
 
   const payload = {
-    user: {
-      id: user.id,
-    },
+    id: user.id,
+    name: user.name,
+    avatar: user.avatar,
   };
 
   const jwtToken = jwt.sign(payload, process.env.JWT_SECRET!, {
-    expiresIn: 3600,
+    expiresIn: 3600000,
   });
   res.status(201).send({ token: jwtToken, user });
 };

@@ -6,10 +6,14 @@ import { auth } from "../../middleware/auth";
  * Imports models
  */
 import { Post } from "../../models/Post";
-import { User } from "../../models/User";
 
 const requestValidation = [check("text", "Text is required").not().isEmpty()];
 
+/**
+ * @route   POST api/posts
+ * @desc    Create a post
+ * @access  Private
+ */
 const addPost = async (req: Request, res: Response) => {
   const errors = validationResult(req);
 
@@ -17,20 +21,26 @@ const addPost = async (req: Request, res: Response) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { text } = req.body;
+  if (!req.currentUser) {
+    return res.status(400).json({ msg: "error roor" });
+  }
 
-  const user = await User.findById(req.currentUser!.id).select("-password");
-  console.log("req.currentUser.id:", req.currentUser!.id);
+  console.log("currentUser", req.currentUser);
 
-  const newPost = Post.build({
-    text,
-    name: req.currentUser!.name,
-    avatar: req.currentUser!.avatar,
-    user: req.currentUser!.id,
-  });
+  try {
+    const newPost = Post.build({
+      text: req.body.text,
+      name: req.currentUser!.name,
+      avatar: req.currentUser!.avatar,
+      user: req.currentUser!.id,
+    });
 
-  const post = await newPost.save();
-  res.json(post);
+    const post = await newPost.save();
+    res.json(post);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
 };
 
 /**

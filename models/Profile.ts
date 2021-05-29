@@ -9,9 +9,9 @@ interface ProfileAttributes {
   website: string;
   location: string;
   status: string;
-  skills: [];
-  bio: string;
-  githubusername: string;
+  skills: string[];
+  bio?: string;
+  githubusername?: string;
   experience: {
     title: string;
     company: string;
@@ -20,7 +20,7 @@ interface ProfileAttributes {
     to: Date;
     current: boolean;
     description: string;
-  };
+  }[];
   education: {
     school: string;
     degree: string;
@@ -29,7 +29,7 @@ interface ProfileAttributes {
     to: Date;
     current: boolean;
     description: string;
-  };
+  }[];
   social: {
     youtube: string;
     twitter: string;
@@ -49,7 +49,7 @@ interface ProfileDocument extends mongoose.Document {
   website: string;
   location: string;
   status: string;
-  skills: [];
+  skills: string[];
   bio: string;
   githubusername: string;
   experience: {
@@ -60,7 +60,7 @@ interface ProfileDocument extends mongoose.Document {
     to: Date;
     current: boolean;
     description: string;
-  };
+  }[];
   education: {
     school: string;
     degree: string;
@@ -69,7 +69,7 @@ interface ProfileDocument extends mongoose.Document {
     to: Date;
     current: boolean;
     description: string;
-  };
+  }[];
   social: {
     youtube: string;
     twitter: string;
@@ -93,7 +93,7 @@ interface ProfileModel extends mongoose.Model<ProfileDocument> {
 const profileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: "User",
   },
   company: {
     type: String,
@@ -205,7 +205,7 @@ profileSchema.statics.build = (attributes: ProfileAttributes) => {
 };
 
 const Profile = mongoose.model<ProfileDocument, ProfileModel>(
-  "Post",
+  "Profile",
   profileSchema
 );
 

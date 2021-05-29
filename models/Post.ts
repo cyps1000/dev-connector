@@ -3,12 +3,14 @@ import mongoose from "mongoose";
 /**
  * Defines the Posts interface
  */
-interface PostAttributes {
+export interface PostAttributes {
   user: string;
   text: string;
   name: string;
   avatar: string;
-  likes?: string[];
+  likes?: {
+    user: string;
+  }[];
   comments?: string[];
   date?: Date;
 }
@@ -21,7 +23,9 @@ interface PostDocument extends mongoose.Document {
   text: string;
   name: string;
   avatar: string;
-  likes: string[];
+  likes: {
+    user: string;
+  }[];
   comments: string[];
   date: Date;
 }
@@ -39,7 +43,7 @@ interface PostModel extends mongoose.Model<PostDocument> {
 const postSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
   },
   text: {
     type: String,
@@ -55,30 +59,14 @@ const postSchema = new mongoose.Schema({
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+        ref: "User",
       },
     },
   ],
   comments: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
-      },
-      text: {
-        type: String,
-        requried: true,
-      },
-      name: {
-        type: String,
-      },
-      avatar: {
-        type: String,
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
     },
   ],
   date: {
