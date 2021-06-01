@@ -1,0 +1,43 @@
+import { Switch, Route, Redirect } from "react-router-dom";
+
+/**
+ * Imports Components
+ */
+import Landing from "../Landing";
+import Register from "../Register";
+import Login from "../Login";
+
+/**
+ * Imports Hooks
+ */
+import { useTypedSelector } from "../../hooks";
+
+/**
+ * Displays the component
+ */
+const PublicRoutes: React.FC = () => {
+  const { isAuthenticated } = useTypedSelector((state) => state.auth);
+
+  /**
+   * Redirect if logged in
+   */
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
+
+  return (
+    <Switch>
+      <Route exact path="/">
+        <Landing />
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      <Route exact path="/register">
+        <Register />
+      </Route>
+    </Switch>
+  );
+};
+
+export default PublicRoutes;

@@ -40,7 +40,7 @@ const registerUser = async (req: Request, res: Response) => {
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
-    return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] });
+    return res.status(400).json({ errors: [{ msg: "Email is in use" }] });
   }
 
   const avatar = gravatar.url(email, {
@@ -49,19 +49,20 @@ const registerUser = async (req: Request, res: Response) => {
     d: "mm",
   });
 
+  /**
+   * Creates the user
+   */
   const user = User.build({ name, email, password, avatar });
   await user.save();
 
   const payload = {
     id: user.id,
-    name: user.name,
-    avatar: user.avatar,
   };
 
   const jwtToken = jwt.sign(payload, process.env.JWT_SECRET!, {
     expiresIn: 3600000,
   });
-  res.status(201).send({ token: jwtToken, user });
+  res.status(201).send({ token: jwtToken });
 };
 
 /**
