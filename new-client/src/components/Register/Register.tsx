@@ -1,5 +1,5 @@
-import { useState, FormEvent, ChangeEvent, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { useState, FormEvent, ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * Imports Material UI Components
@@ -8,7 +8,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -17,7 +16,6 @@ import Container from "@material-ui/core/Container";
 /**
  * Imports Hooks
  */
-import { useTypedSelector } from "../../hooks";
 import { useActions } from "../../hooks";
 
 /**
@@ -37,19 +35,6 @@ const Register: React.FC = (props) => {
   const { register } = useActions();
 
   const { dispatchAlert } = useActions();
-
-  const { isAuthenticated, errors } = useTypedSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (errors && errors.length > 0) {
-      dispatchAlert(
-        errors.map((err) => err.msg),
-        "error",
-        3000
-      );
-    }
-    // eslint-disable-next-line
-  }, [errors]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -71,10 +56,6 @@ const Register: React.FC = (props) => {
 
   const onChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -151,7 +132,7 @@ const Register: React.FC = (props) => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link to="/login" className={classes.linkLogin}>
                 Already have an account? Sign in
               </Link>
             </Grid>
