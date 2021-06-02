@@ -25,6 +25,8 @@ const addPost = async (req: Request, res: Response) => {
     return res.status(400).json({ msg: "error roor" });
   }
 
+  console.log("currentUser", req.currentUser);
+
   try {
     const newPost = Post.build({
       text: req.body.text,

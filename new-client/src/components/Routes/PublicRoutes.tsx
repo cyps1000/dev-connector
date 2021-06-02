@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Landing from "../Landing";
 import Register from "../Register";
 import Login from "../Login";
+import Profiles from "../Profiles";
 
 /**
  * Imports Hooks
@@ -35,6 +36,9 @@ const PublicRoutes: React.FC = () => {
       </Route>
       <Route exact path="/register">
         <Register />
+      </Route>
+      <Route exact path="/profiles">
+        <Profiles />
       </Route>
     </Switch>
   );

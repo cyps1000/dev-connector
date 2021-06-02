@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  linkLogin: {
+    textDecoration: "none",
+    color: "#3f51b5",
+  },
 }));
 
 export { useStyles };

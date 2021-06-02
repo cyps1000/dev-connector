@@ -30,6 +30,13 @@ export enum LogoutUserActionTypes {
 }
 
 /**
+ * Defines the actions types for Deleting the user and profile
+ */
+export enum DeleteUserActionTypes {
+  DELETE_ACCOUNT = "delete_account",
+}
+
+/**
  * Defines the AuthPayload interface
  * This is for both Login and Register payload
  */

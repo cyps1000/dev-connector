@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
  */
 import Dashboard from "../Dashboard";
 import Posts from "../Posts";
+import Profiles from "../Profiles";
 
 /**
  * Imports Hooks
@@ -21,7 +22,7 @@ const PrivateRoutes: React.FC = () => {
    * Redirect if logged in
    */
   if (!isAuthenticated) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/" />;
   }
 
   return (
@@ -31,6 +32,9 @@ const PrivateRoutes: React.FC = () => {
       </Route>
       <Route exact path="/dashboard/posts">
         <Posts />
+      </Route>
+      <Route exact path="/dashboard/profiles">
+        <Profiles />
       </Route>
     </Switch>
   );

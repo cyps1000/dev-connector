@@ -25,8 +25,6 @@ const createProfile = async (req: Request, res: Response) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  console.log("user", req.currentUser!.id);
-
   const {
     company,
     website,
