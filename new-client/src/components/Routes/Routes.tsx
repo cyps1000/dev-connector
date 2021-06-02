@@ -19,6 +19,10 @@ import { setAuthToken } from "../../utils";
  */
 import { useActions } from "../../hooks";
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 /**
  * Displays the component
  */
@@ -26,10 +30,7 @@ const Routes: React.FC = () => {
   const { loadUser } = useActions();
 
   useEffect(() => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-      loadUser();
-    }
+    loadUser();
     // eslint-disable-next-line
   }, []);
 

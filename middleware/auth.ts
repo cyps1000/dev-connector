@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+import { User } from "../models/User";
+
 /**
  * Defines the user payload
  */
@@ -15,8 +17,6 @@ interface UserPayload {
  */
 export interface Token {
   id: string;
-  name: string;
-  avatar: string;
   iat: number;
   exp: number;
 }
@@ -28,12 +28,12 @@ declare global {
   namespace Express {
     interface Request {
       token?: Token;
-      currentUser?: string;
+      currentUser?: UserPayload;
     }
   }
 }
 
-export const auth = (req: Request, res: Response, next: NextFunction) => {
+export const auth = async (req: Request, res: Response, next: NextFunction) => {
   /**
    * Gets the token from the header
    */
@@ -53,6 +53,21 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET!) as Token;
 
     req.token = payload;
+
+    /**
+     * Searches for the user in the db
+     */
+    const user = await User.findById(req.token.id);
+    if (!user) {
+      return res.status(404).send("Authorization denied.");
+    }
+
+    req.currentUser = {
+      id: user.id,
+      name: user.name,
+      avatar: user.avatar,
+    };
+
     next();
   } catch (error) {
     res.status(401).json({ msg: "Token is not valid" });

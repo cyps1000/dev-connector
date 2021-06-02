@@ -3,12 +3,9 @@ import {
   LoginUserActionTypes,
   LogoutUserActionTypes,
   LoadUserActionTypes,
-  DeleteUserActionTypes,
   AuthPayload,
   LoadUser,
 } from "../types";
-
-import { ClearProfileAction, GetProfileErrorAction } from "./profile";
 
 /**
  * Defines the AuthSuccess interface
@@ -32,7 +29,7 @@ export interface AuthFailAction {
 
 export interface LogoutUserAction {
   type: LogoutUserActionTypes.LOGOUT;
-  payload?: {
+  payload: {
     msg: string;
   }[];
 }
@@ -56,13 +53,6 @@ export interface UserErrorAction {
 }
 
 /**
- * Defines the DeleteUserAction interface
- */
-export interface DeleteUserAction {
-  type: DeleteUserActionTypes.DELETE_ACCOUNT;
-}
-
-/**
  * Defines the general action types
  */
 export type AuthUserAction =
@@ -70,7 +60,4 @@ export type AuthUserAction =
   | AuthFailAction
   | UserLoadedAction
   | UserErrorAction
-  | LogoutUserAction
-  | DeleteUserAction
-  | ClearProfileAction
-  | GetProfileErrorAction;
+  | LogoutUserAction;

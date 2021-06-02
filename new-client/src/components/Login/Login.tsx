@@ -1,5 +1,5 @@
-import { useState, FormEvent, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import { useState, FormEvent, ChangeEvent, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 
 /**
  * Imports Material UI Components
@@ -8,14 +8,16 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import LockOpenOutlinedIcon from "@material-ui/icons/LockOpenOutlined";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
 /**
  * Imports Hooks
  */
+import { useTypedSelector } from "../../hooks";
 import { useActions } from "../../hooks";
 
 /**
@@ -30,6 +32,21 @@ const Login: React.FC = () => {
   const classes = useStyles();
 
   const { login } = useActions();
+
+  const { dispatchAlert } = useActions();
+
+  const { isAuthenticated, errors } = useTypedSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (errors && errors.length > 0) {
+      dispatchAlert(
+        errors.map((err) => err.msg),
+        "error",
+        3000
+      );
+    }
+    // eslint-disable-next-line
+  }, [errors]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -46,12 +63,19 @@ const Login: React.FC = () => {
     login(email, password);
   };
 
+  /**
+   * Redirect if logged in
+   */
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOpenOutlinedIcon />
+          <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
@@ -93,7 +117,7 @@ const Login: React.FC = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <Link className={classes.linkRegister} to="/register">
+              <Link href="#" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

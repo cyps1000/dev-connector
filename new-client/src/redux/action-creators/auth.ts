@@ -6,13 +6,10 @@ import {
   LoginUserActionTypes,
   LoadUserActionTypes,
   LogoutUserActionTypes,
-  DeleteUserActionTypes,
-  ProfileActionTypes,
 } from "../types";
 import { AuthUserAction } from "../actions";
 
 import { setAuthToken } from "../../utils";
-import { dispatchAlert } from "./alert";
 
 /**
  * Defines the interface for the Register inputs
@@ -44,20 +41,15 @@ export const register =
         type: RegisterUserActionTypes.REGISTER_SUCCESS,
         payload: data,
       });
-      loadUser()(dispatch);
     } catch (err) {
-      const errors = err.response.data.errors;
+      if (err.response) {
+        const errors = err.response.data.errors;
 
-      dispatchAlert(
-        errors.map((err: { msg: any }) => err.msg),
-        "error",
-        3000
-      )(dispatch);
-
-      dispatch({
-        type: RegisterUserActionTypes.REGISTER_FAIL,
-        payload: errors,
-      });
+        dispatch({
+          type: RegisterUserActionTypes.REGISTER_FAIL,
+          payload: errors,
+        });
+      }
     }
   };
 
@@ -78,25 +70,21 @@ export const login =
     try {
       const { data } = await axios.post("/api/auth", body, config);
 
+      console.log(data);
+
       dispatch({
         type: LoginUserActionTypes.LOGIN_SUCCESS,
         payload: data,
       });
-      loadUser()(dispatch);
-      dispatchAlert(["Successfully logged in!"], "success", 3000)(dispatch);
     } catch (err) {
-      const errors = err.response.data.errors;
+      if (err.response) {
+        const errors = err.response.data.errors;
 
-      dispatchAlert(
-        errors.map((err: { msg: any }) => err.msg),
-        "error",
-        3000
-      )(dispatch);
-
-      dispatch({
-        type: LoginUserActionTypes.LOGIN_FAIL,
-        payload: errors,
-      });
+        dispatch({
+          type: LoginUserActionTypes.LOGIN_FAIL,
+          payload: errors,
+        });
+      }
     }
   };
 
@@ -130,36 +118,6 @@ export const loadUser = () => async (dispatch: Dispatch<AuthUserAction>) => {
 /**
  * Handles Logging out the user
  */
-export const logout = () => (dispatch: Dispatch<AuthUserAction>) => {
-  dispatch({ type: ProfileActionTypes.CLEAR_PROFILE });
+export const logout = () => (dispatch: Dispatch) => {
   dispatch({ type: LogoutUserActionTypes.LOGOUT });
 };
-
-/**
- * Handles Deleting the Account and Profile
- */
-export const deleteAccount =
-  () => async (dispatch: Dispatch<AuthUserAction>) => {
-    if (window.confirm("Are you sure? This cannot be undone.")) {
-      try {
-        await axios.delete(`/api/profile`);
-
-        dispatch({ type: ProfileActionTypes.CLEAR_PROFILE });
-        dispatch({ type: DeleteUserActionTypes.DELETE_ACCOUNT });
-
-        dispatchAlert(
-          ["Your account has beeen permanently removed"],
-          "success"
-        )(dispatch);
-      } catch (err) {
-        if (err.response) {
-          const errors = err.response.data.errors;
-
-          dispatch({
-            type: ProfileActionTypes.PROFILE_ERROR,
-            payload: errors,
-          });
-        }
-      }
-    }
-  };
