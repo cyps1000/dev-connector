@@ -7,6 +7,7 @@ import Landing from "../Landing";
 import Register from "../Register";
 import Login from "../Login";
 import Profiles from "../Profiles";
+import Profile from "../Profile";
 
 /**
  * Imports Hooks
@@ -22,9 +23,9 @@ const PublicRoutes: React.FC = () => {
   /**
    * Redirect if logged in
    */
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
+  // if (isAuthenticated) {
+  //   return <Redirect to="/dashboard" />;
+  // }
 
   return (
     <Switch>
@@ -39,6 +40,9 @@ const PublicRoutes: React.FC = () => {
       </Route>
       <Route exact path="/profiles">
         <Profiles />
+      </Route>
+      <Route exact path="/profile/:id">
+        <Profile />
       </Route>
     </Switch>
   );

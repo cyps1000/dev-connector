@@ -9,21 +9,14 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
  */
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
-    backgroundColor: "#7074e4",
-    color: "#fff",
-    marginTop: "2rem",
+    backgroundColor: "#bfbfbf",
+    color: "#7074e4",
+    marginTop: "0.4rem",
     paddingTop: "2rem",
     paddingBottom: "2rem",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  avatar: {
-    width: "7rem",
-    height: "7rem",
-  },
-  profileName: {
-    paddingTop: "1rem",
   },
   skills: {
     display: "flex",
@@ -39,18 +32,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     alignItems: "center",
   },
-  viewProfileBtn: {
-    marginTop: "1rem",
-    backgroundColor: "#fff",
-    "& a": {
-      textDecoration: "none",
-      color: "inherit",
-    },
-    color: "#7074e4",
-    "&:hover": {
-      backgroundColor: "#5d61ce",
-      color: "#fff",
-    },
+  bio: {
+    display: "flex",
+    justifyContent: "center",
   },
 }));
 

@@ -1,6 +1,13 @@
 import { Fragment, useEffect } from "react";
 
 /**
+ * Imports Material UI Components
+ */
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import AccountTreeOutlinedIcon from "@material-ui/icons/AccountTreeOutlined";
+
+/**
  * Imports Components
  */
 import Spinner from "../Spinner";
@@ -34,27 +41,41 @@ const Profiles: React.FC = () => {
     getProfiles();
     // eslint-disable-next-line
   }, []);
+
   /**
    * Gets the component styles
    */
   const classes = useStyles();
 
   return (
-    <Fragment>
+    <Container maxWidth="md" className={classes.container}>
       {loading ? (
         <Spinner />
       ) : (
         <Fragment>
+          <Typography variant="h3" color="primary">
+            Developers
+          </Typography>
+          <Typography
+            variant="h5"
+            color="textPrimary"
+            className={classes.paragraph}
+          >
+            <AccountTreeOutlinedIcon />
+            Browse & Connect with Developers
+          </Typography>
           {profiles.length > 0 ? (
-            profiles.map((profile) => (
-              <ProfileItem key={profile.id} profile={profile} />
+            profiles.map((profile, index) => (
+              <ProfileItem key={index} profile={profile} />
             ))
           ) : (
-            <h4>No profiles found</h4>
+            <Typography variant="h6" className={classes.noProfileFound}>
+              No profiles found.
+            </Typography>
           )}
         </Fragment>
       )}
-    </Fragment>
+    </Container>
   );
 };
 

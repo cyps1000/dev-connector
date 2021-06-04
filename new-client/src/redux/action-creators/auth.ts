@@ -136,13 +136,13 @@ export const logout = () => (dispatch: Dispatch<AuthUserAction>) => {
 };
 
 /**
- * Handles Deleting the Account and Profile
+ * Handles Deleting the Account, Posts, Commments **TO ADD: POSTS AND COMMENTS**
  */
 export const deleteAccount =
   () => async (dispatch: Dispatch<AuthUserAction>) => {
     if (window.confirm("Are you sure? This cannot be undone.")) {
       try {
-        await axios.delete(`/api/profile`);
+        await axios.delete(`/api/user`);
 
         dispatch({ type: ProfileActionTypes.CLEAR_PROFILE });
         dispatch({ type: DeleteUserActionTypes.DELETE_ACCOUNT });

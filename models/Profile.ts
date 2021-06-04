@@ -40,11 +40,11 @@ export interface ProfileAttributes {
   experience?: Experience[];
   education?: Education[];
   social?: {
-    youtube: string;
-    twitter: string;
-    facebook: string;
-    linkedin: string;
-    instagram: string;
+    youtube?: string;
+    twitter?: string;
+    facebook?: string;
+    linkedin?: string;
+    instagram?: string;
   };
   date?: Date;
 }

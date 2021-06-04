@@ -15,9 +15,9 @@ export enum ProfileActionTypes {
  * Defines the interface for the Social links
  */
 interface SocialObject {
-  youtube: string;
+  youtube: string | null;
   facebook: string;
-  twitter: string;
+  twitter: string | null;
   instagram: string;
   linkedin: string;
 }
@@ -77,7 +77,7 @@ export interface GitHubRepoPayload {
  */
 export interface ProfilePayload {
   id: string;
-  social: SocialObject;
+  social?: SocialObject;
   skills: string[];
   user: User;
   company: string;

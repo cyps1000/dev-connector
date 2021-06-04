@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Dashboard from "../Dashboard";
 import Posts from "../Posts";
 import Profiles from "../Profiles";
+import Profile from "../Profile";
 
 /**
  * Imports Hooks
@@ -35,6 +36,9 @@ const PrivateRoutes: React.FC = () => {
       </Route>
       <Route exact path="/dashboard/profiles">
         <Profiles />
+      </Route>
+      <Route exact path="/dashboard/profile/:id">
+        <Profile />
       </Route>
     </Switch>
   );

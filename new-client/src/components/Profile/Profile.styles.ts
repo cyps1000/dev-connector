@@ -12,16 +12,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: "7rem",
     height: "110vh",
   },
-  paragraph: {
+  backProfilesBtn: {
     marginTop: "1rem",
-    "& svg": {
-      marginRight: "0.35rem",
-      color: "#3f51b5",
+    backgroundColor: "#fff",
+    "& a": {
+      textDecoration: "none",
+      color: "inherit",
     },
-  },
-  noProfileFound: {
-    paddingTop: "1.5rem",
-    paddingLeft: "1rem",
+    color: "#7074e4",
+    "&:hover": {
+      backgroundColor: "#5d61ce",
+      color: "#fff",
+    },
   },
 }));
 

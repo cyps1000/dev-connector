@@ -19,39 +19,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
   },
   avatar: {
-    width: "7rem",
-    height: "7rem",
+    width: "10rem",
+    height: "10rem",
   },
   profileName: {
     paddingTop: "1rem",
   },
-  skills: {
-    display: "flex",
-    "& div": {
-      paddingRight: "1rem",
-      "& svg": {
-        color: "#fff",
-        marginRight: "0.2rem",
-      },
-    },
-  },
-  skillsIcon: {
-    display: "flex",
-    alignItems: "center",
-  },
-  viewProfileBtn: {
-    marginTop: "1rem",
-    backgroundColor: "#fff",
-    "& a": {
-      textDecoration: "none",
-      color: "inherit",
-    },
-    color: "#7074e4",
-    "&:hover": {
-      backgroundColor: "#5d61ce",
-      color: "#fff",
-    },
-  },
+  socials: {},
 }));
 
 export { useStyles };

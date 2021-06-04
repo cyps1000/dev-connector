@@ -21,7 +21,7 @@ interface AuthUsers {
 
 const initialState: AuthUsers = {
   token: localStorage.getItem("token"),
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem("token") ? true : false,
   loading: true,
   user: {
     name: "",
