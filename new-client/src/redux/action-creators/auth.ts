@@ -7,7 +7,7 @@ import {
   LoadUserActionTypes,
   LogoutUserActionTypes,
   DeleteUserActionTypes,
-  ProfileActionTypes,
+  ProfileActionTypes
 } from "../types";
 import { AuthUserAction } from "../actions";
 
@@ -31,8 +31,8 @@ export const register =
   async (dispatch: Dispatch<AuthUserAction>) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     };
 
     const body = JSON.stringify({ name, email, password });
@@ -42,7 +42,7 @@ export const register =
 
       dispatch({
         type: RegisterUserActionTypes.REGISTER_SUCCESS,
-        payload: data,
+        payload: data
       });
       loadUser()(dispatch);
     } catch (err) {
@@ -56,7 +56,7 @@ export const register =
 
       dispatch({
         type: RegisterUserActionTypes.REGISTER_FAIL,
-        payload: errors,
+        payload: errors
       });
     }
   };
@@ -69,8 +69,8 @@ export const login =
   async (dispatch: Dispatch<AuthUserAction>) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     };
 
     const body = JSON.stringify({ email, password });
@@ -80,7 +80,7 @@ export const login =
 
       dispatch({
         type: LoginUserActionTypes.LOGIN_SUCCESS,
-        payload: data,
+        payload: data
       });
       loadUser()(dispatch);
       dispatchAlert(["Successfully logged in!"], "success", 3000)(dispatch);
@@ -95,7 +95,7 @@ export const login =
 
       dispatch({
         type: LoginUserActionTypes.LOGIN_FAIL,
-        payload: errors,
+        payload: errors
       });
     }
   };
@@ -113,7 +113,7 @@ export const loadUser = () => async (dispatch: Dispatch<AuthUserAction>) => {
 
     dispatch({
       type: LoadUserActionTypes.USER_LOADED,
-      payload: data,
+      payload: data
     });
   } catch (err) {
     if (err.response) {
@@ -121,7 +121,7 @@ export const loadUser = () => async (dispatch: Dispatch<AuthUserAction>) => {
 
       dispatch({
         type: LoadUserActionTypes.AUTH_ERROR,
-        payload: errors,
+        payload: errors
       });
     }
   }
@@ -131,8 +131,9 @@ export const loadUser = () => async (dispatch: Dispatch<AuthUserAction>) => {
  * Handles Logging out the user
  */
 export const logout = () => (dispatch: Dispatch<AuthUserAction>) => {
-  dispatch({ type: ProfileActionTypes.CLEAR_PROFILE });
+  // dispatch({ type: ProfileActionTypes.CLEAR_PROFILE });
   dispatch({ type: LogoutUserActionTypes.LOGOUT });
+  dispatchAlert(["Logged out"], "success")(dispatch);
 };
 
 /**
@@ -157,7 +158,7 @@ export const deleteAccount =
 
           dispatch({
             type: ProfileActionTypes.PROFILE_ERROR,
-            payload: errors,
+            payload: errors
           });
         }
       }

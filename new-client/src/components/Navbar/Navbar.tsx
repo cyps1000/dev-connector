@@ -17,13 +17,20 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import CodeOutlinedIcon from "@material-ui/icons/CodeOutlined";
-import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
-import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
-import DescriptionOutlinedIcon from "@material-ui/icons/DescriptionOutlined";
-import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import LockOpenOutlinedIcon from "@material-ui/icons/LockOpenOutlined";
+
+/**
+ * Imports Font Awesome Icons
+ */
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCode,
+  faUsers,
+  faUserPlus,
+  faSignInAlt,
+  faPowerOff,
+  faNewspaper,
+  faThLarge
+} from "@fortawesome/free-solid-svg-icons";
 
 /**
  * Imports Hooks
@@ -113,15 +120,15 @@ const Navbar: React.FC = (props) => {
   const guestLinks = (
     <Fragment>
       <Button color="inherit" onClick={goToDevelopersPublic}>
-        <AccountBoxOutlinedIcon />
+        <FontAwesomeIcon icon={faUsers} />
         Developers
       </Button>
       <Button color="inherit" onClick={goToRegister}>
-        <LockOutlinedIcon />
+        <FontAwesomeIcon icon={faUserPlus} />
         Register
       </Button>
       <Button color="inherit" onClick={goToLogin}>
-        <LockOpenOutlinedIcon />
+        <FontAwesomeIcon icon={faSignInAlt} />
         Login
       </Button>
     </Fragment>
@@ -133,17 +140,17 @@ const Navbar: React.FC = (props) => {
   const guestLinksMobile = (
     <List>
       <ListItem button onClick={goToDevelopersPublic}>
-        <AccountBoxOutlinedIcon />
+        <FontAwesomeIcon icon={faUsers} />
         <ListItemText primary="Developers" />
       </ListItem>
       <Divider />
       <ListItem button onClick={goToRegister}>
-        <LockOutlinedIcon />
+        <FontAwesomeIcon icon={faUserPlus} />
         <ListItemText primary="Register" />
       </ListItem>
       <Divider />
       <ListItem button onClick={goToLogin}>
-        <LockOpenOutlinedIcon />
+        <FontAwesomeIcon icon={faSignInAlt} />
         <ListItemText primary="Login" />
       </ListItem>
       <Divider />
@@ -156,18 +163,18 @@ const Navbar: React.FC = (props) => {
   const authLinks = (
     <Fragment>
       <Button color="inherit" onClick={goToDevelopers}>
-        <AccountBoxOutlinedIcon />
+        <FontAwesomeIcon icon={faUsers} />
         Developers
       </Button>
       <Button color="inherit" onClick={goToPosts}>
-        <DescriptionOutlinedIcon /> Posts
+        <FontAwesomeIcon icon={faNewspaper} /> Posts
       </Button>
       <Button color="inherit" onClick={goToDashboard}>
-        <DashboardOutlinedIcon />
+        <FontAwesomeIcon icon={faThLarge} />
         Dashboard
       </Button>
       <Button color="inherit" onClick={logout}>
-        <ExitToAppOutlinedIcon />
+        <FontAwesomeIcon icon={faPowerOff} />
         Logout
       </Button>
     </Fragment>
@@ -179,19 +186,19 @@ const Navbar: React.FC = (props) => {
   const authLinksMobile = (
     <List>
       <ListItem button onClick={goToDevelopers}>
-        <AccountBoxOutlinedIcon />
+        <FontAwesomeIcon icon={faUsers} />
         <ListItemText primary="Developers" />
       </ListItem>
       <ListItem button onClick={goToPosts}>
-        <DescriptionOutlinedIcon />
+        <FontAwesomeIcon icon={faNewspaper} />
         <ListItemText primary="Posts" />
       </ListItem>
       <ListItem button onClick={goToDashboard}>
-        <DashboardOutlinedIcon />
+        <FontAwesomeIcon icon={faThLarge} />
         <ListItemText primary="Dashboard" />
       </ListItem>
       <ListItem button onClick={logout}>
-        <ExitToAppOutlinedIcon />
+        <FontAwesomeIcon icon={faPowerOff} />
         <ListItemText primary="Logout" />
       </ListItem>
     </List>
@@ -211,7 +218,7 @@ const Navbar: React.FC = (props) => {
               aria-label="menu"
               onClick={goToHome}
             >
-              <CodeOutlinedIcon />
+              <FontAwesomeIcon icon={faCode} />
               <Typography variant="h5">DevConnector</Typography>
             </IconButton>
             <IconButton
@@ -231,7 +238,7 @@ const Navbar: React.FC = (props) => {
           open={open}
           onClose={closeDrawer}
           classes={{
-            paper: classes.paper,
+            paper: classes.paper
           }}
         >
           <Box className={classes.list} data-testid="navbar-list-container">
@@ -253,7 +260,7 @@ const Navbar: React.FC = (props) => {
             aria-label="menu"
             onClick={goToHome}
           >
-            <CodeOutlinedIcon />
+            <FontAwesomeIcon icon={faCode} />
             <Typography variant="h5">DevConnector</Typography>
           </IconButton>
           <Box className={classes.menu}>

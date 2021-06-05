@@ -5,7 +5,9 @@ import { useParams, Link } from "react-router-dom";
  * Imports Material UI Components
  */
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
 /**
@@ -13,6 +15,8 @@ import Button from "@material-ui/core/Button";
  */
 import ProfileTop from "../ProfileTop";
 import ProfileAbout from "../ProfileAbout";
+import ProfileExperience from "../ProfileExperience";
+import ProfileEducation from "../ProfileEducation";
 import Spinner from "../Spinner";
 
 /**
@@ -64,8 +68,58 @@ const Profile: React.FC = () => {
           <Button variant="outlined" className={classes.backProfilesBtn}>
             <Link to="/profiles">Back to Profiles</Link>
           </Button>
+          {isAuthenticated &&
+            loadingAuth === false &&
+            user.id === profile.user.id && (
+              <Button variant="outlined" className={classes.editProfilesBtn}>
+                <Link to="/edit-profile">Edit Profile</Link>
+              </Button>
+            )}
+
           <ProfileTop profile={profile} />
           <ProfileAbout profile={profile} />
+          <Grid container spacing={2}>
+            <Grid item xs={12} lg={6}>
+              <Paper elevation={4} className={classes.experience}>
+                <Typography variant="h4">Experience</Typography>
+                {profile.experience.length > 0 ? (
+                  <Fragment>
+                    {profile.experience.map((exp, index) => (
+                      <ProfileExperience key={index} profile={exp} />
+                    ))}
+                  </Fragment>
+                ) : (
+                  <Typography
+                    variant="h6"
+                    color="textPrimary"
+                    className={classes.noData}
+                  >
+                    No experience credentials
+                  </Typography>
+                )}
+              </Paper>
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Paper elevation={4} className={classes.experience}>
+                <Typography variant="h4">Education</Typography>
+                {profile.education.length > 0 ? (
+                  <Fragment>
+                    {profile.education.map((edu, index) => (
+                      <ProfileEducation key={index} profile={edu} />
+                    ))}
+                  </Fragment>
+                ) : (
+                  <Typography
+                    variant="h6"
+                    color="textPrimary"
+                    className={classes.noData}
+                  >
+                    No education credentials
+                  </Typography>
+                )}
+              </Paper>
+            </Grid>
+          </Grid>
         </Fragment>
       )}
     </Container>

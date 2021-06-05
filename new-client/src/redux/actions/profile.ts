@@ -1,7 +1,7 @@
 import {
   ProfileActionTypes,
   ProfilePayload,
-  GitHubRepoPayload,
+  GitHubRepoPayload
 } from "../types";
 
 /**
@@ -11,6 +11,13 @@ import {
 export interface GetProfileAction {
   type: ProfileActionTypes.GET_PROFILE | ProfileActionTypes.UPDATE_PROFILE;
   payload: ProfilePayload;
+}
+
+/**
+ * Defines the DeleteProfileAction interface
+ */
+export interface DeleteProfileAction {
+  type: ProfileActionTypes.DELETE_PROFILE;
 }
 
 /**
@@ -58,6 +65,7 @@ export interface ResetProfileLoadingAction {
  */
 export type ProfileAction =
   | GetProfileAction
+  | DeleteProfileAction
   | GetAllProfilesAction
   | GetRiposAction
   | GetProfileErrorAction

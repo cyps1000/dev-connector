@@ -7,6 +7,7 @@ import Dashboard from "../Dashboard";
 import Posts from "../Posts";
 import Profiles from "../Profiles";
 import Profile from "../Profile";
+import CreateProfile from "../CreateProfile";
 
 /**
  * Imports Hooks
@@ -30,6 +31,9 @@ const PrivateRoutes: React.FC = () => {
     <Switch>
       <Route exact path="/dashboard">
         <Dashboard />
+      </Route>
+      <Route exact path="/dashboard/create-profile">
+        <CreateProfile />
       </Route>
       <Route exact path="/dashboard/posts">
         <Posts />

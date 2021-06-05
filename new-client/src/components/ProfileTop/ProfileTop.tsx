@@ -42,7 +42,7 @@ const ProfileTop: React.FC<ProfileTopProps> = (props) => {
   const classes = useStyles();
 
   return (
-    <Paper elevation={0} className={classes.paper}>
+    <Paper elevation={4} className={classes.paper}>
       <Avatar src={profile.user.avatar} className={classes.avatar} />
       <Typography variant="h3" className={classes.profileName} gutterBottom>
         {profile.user.name}

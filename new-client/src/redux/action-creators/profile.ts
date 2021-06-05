@@ -59,7 +59,7 @@ export const getCurrentProfile =
 
       dispatch({
         type: ProfileActionTypes.GET_PROFILE,
-        payload: res.data,
+        payload: res.data
       });
     } catch (err) {
       if (err.response) {
@@ -67,7 +67,7 @@ export const getCurrentProfile =
 
         dispatch({
           type: ProfileActionTypes.PROFILE_ERROR,
-          payload: errors,
+          payload: errors
         });
       }
     }
@@ -85,7 +85,7 @@ export const getProfiles = () => async (dispatch: Dispatch<ProfileAction>) => {
 
     dispatch({
       type: ProfileActionTypes.GET_PROFILES,
-      payload: res.data,
+      payload: res.data
     });
   } catch (err) {
     if (err.response) {
@@ -93,7 +93,7 @@ export const getProfiles = () => async (dispatch: Dispatch<ProfileAction>) => {
 
       dispatch({
         type: ProfileActionTypes.PROFILE_ERROR,
-        payload: errors,
+        payload: errors
       });
     }
   }
@@ -111,7 +111,7 @@ export const getProfileById =
 
       dispatch({
         type: ProfileActionTypes.GET_PROFILE,
-        payload: res.data,
+        payload: res.data
       });
     } catch (err) {
       if (err.response) {
@@ -119,7 +119,7 @@ export const getProfileById =
 
         dispatch({
           type: ProfileActionTypes.PROFILE_ERROR,
-          payload: errors,
+          payload: errors
         });
       }
     }
@@ -134,15 +134,15 @@ export const createProfile =
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"
+        }
       };
 
       const res = await axios.post("/api/profile", formData, config);
 
       dispatch({
         type: ProfileActionTypes.GET_PROFILE,
-        payload: res.data,
+        payload: res.data
       });
 
       dispatchAlert(
@@ -165,8 +165,35 @@ export const createProfile =
 
       dispatch({
         type: ProfileActionTypes.PROFILE_ERROR,
-        payload: errors,
+        payload: errors
       });
+    }
+  };
+
+/**
+ * Handles deleting the profile
+ */
+export const deleteProfile =
+  () => async (dispatch: Dispatch<ProfileAction>) => {
+    if (window.confirm("Are you sure? This cannot be undone.")) {
+      try {
+        await axios.delete(`/api/profile`);
+
+        dispatch({
+          type: ProfileActionTypes.DELETE_PROFILE
+        });
+
+        dispatchAlert(["Profile removed"], "success")(dispatch);
+      } catch (err) {
+        if (err.response) {
+          const errors = err.response.data.errors;
+
+          dispatch({
+            type: ProfileActionTypes.PROFILE_ERROR,
+            payload: errors
+          });
+        }
+      }
     }
   };
 
@@ -180,7 +207,7 @@ export const getGithubRepos =
 
       dispatch({
         type: ProfileActionTypes.GET_REPOS,
-        payload: res.data,
+        payload: res.data
       });
     } catch (err) {
       if (err.response) {
@@ -188,7 +215,7 @@ export const getGithubRepos =
 
         dispatch({
           type: ProfileActionTypes.PROFILE_ERROR,
-          payload: errors,
+          payload: errors
         });
       }
     }
@@ -203,15 +230,15 @@ export const addExperience =
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"
+        }
       };
 
       const res = await axios.put("/api/profile/experience", formData, config);
 
       dispatch({
         type: ProfileActionTypes.UPDATE_PROFILE,
-        payload: res.data,
+        payload: res.data
       });
 
       dispatchAlert(["Experience added"], "success")(dispatch);
@@ -228,7 +255,7 @@ export const addExperience =
 
       dispatch({
         type: ProfileActionTypes.PROFILE_ERROR,
-        payload: errors,
+        payload: errors
       });
     }
   };
@@ -242,15 +269,15 @@ export const addEducation =
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"
+        }
       };
 
       const res = await axios.put("/api/profile/education", formData, config);
 
       dispatch({
         type: ProfileActionTypes.UPDATE_PROFILE,
-        payload: res.data,
+        payload: res.data
       });
 
       dispatchAlert(["Education added"], "success")(dispatch);
@@ -267,7 +294,7 @@ export const addEducation =
 
       dispatch({
         type: ProfileActionTypes.PROFILE_ERROR,
-        payload: errors,
+        payload: errors
       });
     }
   };
@@ -283,7 +310,7 @@ export const deleteExperience =
 
         dispatch({
           type: ProfileActionTypes.UPDATE_PROFILE,
-          payload: res.data,
+          payload: res.data
         });
 
         dispatchAlert(["Experience removed"], "success")(dispatch);
@@ -293,7 +320,7 @@ export const deleteExperience =
 
           dispatch({
             type: ProfileActionTypes.PROFILE_ERROR,
-            payload: errors,
+            payload: errors
           });
         }
       }
@@ -311,7 +338,7 @@ export const deleteEducation =
 
         dispatch({
           type: ProfileActionTypes.UPDATE_PROFILE,
-          payload: res.data,
+          payload: res.data
         });
 
         dispatchAlert(["Education removed"], "success")(dispatch);
@@ -321,7 +348,7 @@ export const deleteEducation =
 
           dispatch({
             type: ProfileActionTypes.PROFILE_ERROR,
-            payload: errors,
+            payload: errors
           });
         }
       }

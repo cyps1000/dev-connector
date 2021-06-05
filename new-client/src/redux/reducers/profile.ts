@@ -3,7 +3,7 @@ import produce from "immer";
 import {
   ProfileActionTypes,
   ProfilePayload,
-  GitHubRepoPayload,
+  GitHubRepoPayload
 } from "../types";
 import { ProfileAction } from "../actions";
 
@@ -22,7 +22,7 @@ const initialState: Profiles = {
   profiles: [],
   repos: [],
   loading: true,
-  errors: [],
+  errors: []
 };
 
 const reducer = produce(
@@ -51,6 +51,7 @@ const reducer = produce(
         return state;
 
       case ProfileActionTypes.CLEAR_PROFILE:
+      case ProfileActionTypes.DELETE_PROFILE:
         state.profile = null;
         state.repos = [];
         state.loading = false;

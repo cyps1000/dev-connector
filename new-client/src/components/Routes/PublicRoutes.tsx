@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 /**
  * Imports Components
@@ -12,13 +12,13 @@ import Profile from "../Profile";
 /**
  * Imports Hooks
  */
-import { useTypedSelector } from "../../hooks";
+//import { useTypedSelector } from "../../hooks";
 
 /**
  * Displays the component
  */
 const PublicRoutes: React.FC = () => {
-  const { isAuthenticated } = useTypedSelector((state) => state.auth);
+  //const { isAuthenticated } = useTypedSelector((state) => state.auth);
 
   /**
    * Redirect if logged in

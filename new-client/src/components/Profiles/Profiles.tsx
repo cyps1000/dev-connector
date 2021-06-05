@@ -5,7 +5,12 @@ import { Fragment, useEffect } from "react";
  */
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import AccountTreeOutlinedIcon from "@material-ui/icons/AccountTreeOutlined";
+
+/**
+ * Imports Font Awesome Icons
+ */
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faConnectdevelop } from "@fortawesome/free-brands-svg-icons";
 
 /**
  * Imports Components
@@ -61,7 +66,7 @@ const Profiles: React.FC = () => {
             color="textPrimary"
             className={classes.paragraph}
           >
-            <AccountTreeOutlinedIcon />
+            <FontAwesomeIcon icon={faConnectdevelop} />
             Browse & Connect with Developers
           </Typography>
           {profiles.length > 0 ? (

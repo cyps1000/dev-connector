@@ -1,6 +1,7 @@
 /**
  * Imports Material UI Components
  */
+import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -35,22 +36,22 @@ const ProfileAbout: React.FC<ProfileTopProps> = (props) => {
   const classes = useStyles();
 
   return (
-    <Paper elevation={0} className={classes.paper}>
+    <Paper elevation={4} className={classes.paper}>
       {profile.bio && (
-        <Box className={classes.bio}>
+        <Container maxWidth="md" className={classes.container}>
           <Typography variant="h4" gutterBottom>
             {profile.user.name.trim().split(" ")[0]}'s Bio
           </Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" className={classes.bio} color="textPrimary">
             {profile.bio}
           </Typography>
-        </Box>
+        </Container>
       )}
-      <Divider />
+      <Divider className={classes.divider} />
       <Typography variant="h4" gutterBottom>
         Skill Set
       </Typography>
-      <Typography className={classes.skills} gutterBottom>
+      <Typography className={classes.skills} gutterBottom color="textPrimary">
         {profile.skills.slice(0, 5).map((skill) => (
           <Box className={classes.skillsIcon}>
             <CheckOutlinedIcon />

@@ -4,11 +4,12 @@
 export enum ProfileActionTypes {
   GET_PROFILE = "get_profile",
   PROFILE_ERROR = "profile_error",
+  DELETE_PROFILE = "delete_profile",
   CLEAR_PROFILE = "clear_profile",
   UPDATE_PROFILE = "update_profile",
   GET_PROFILES = "get_profiles",
   GET_REPOS = "get_repos",
-  RESET_PROFILE_LOADING = "reset_profile_loading",
+  RESET_PROFILE_LOADING = "reset_profile_loading"
 }
 
 /**
@@ -35,7 +36,7 @@ interface User {
 /**
  * Defines the interface for Experience
  */
-interface Experience {
+export interface Experience {
   id: string;
   current: boolean;
   title: string;
@@ -49,7 +50,7 @@ interface Experience {
 /**
  * Defines the interface for Education
  */
-interface Education {
+export interface Education {
   id: string;
   current: boolean;
   school: string;

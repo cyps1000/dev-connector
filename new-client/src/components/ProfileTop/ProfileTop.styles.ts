@@ -16,16 +16,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: "2rem",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center"
   },
   avatar: {
     width: "10rem",
-    height: "10rem",
+    height: "10rem"
   },
   profileName: {
-    paddingTop: "1rem",
+    paddingTop: "1rem"
   },
-  socials: {},
+  socials: {
+    paddingTop: "0.8rem",
+
+    "& svg": {
+      fontSize: "2rem",
+      marginRight: "1rem",
+      color: "#fff",
+      "& :hover": {
+        color: "#bfbfbf"
+      }
+    }
+  }
 }));
 
 export { useStyles };

@@ -65,7 +65,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     req.currentUser = {
       id: user.id,
       name: user.name,
-      avatar: user.avatar,
+      avatar: user.avatar
     };
 
     next();
