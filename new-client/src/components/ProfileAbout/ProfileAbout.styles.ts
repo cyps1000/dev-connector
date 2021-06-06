@@ -22,16 +22,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   skills: {
     display: "flex",
     "& div": {
-      paddingRight: "1rem",
-      "& svg": {
-        color: "#7074e4",
-        marginRight: "0.2rem"
-      }
+      paddingRight: "1rem"
     }
   },
   skillsIcon: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    marginRight: "1rem",
+    "& svg": {
+      color: "#7074e4",
+      marginRight: "0.2rem"
+    }
   },
   container: {
     display: "flex",

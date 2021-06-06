@@ -50,8 +50,8 @@ const ProfileItem: React.FC<ProfileItemProps> = (props) => {
         {profile.location && <Box>{profile.location}</Box>}
       </Typography>
       <Typography className={classes.skills} gutterBottom>
-        {profile.skills.slice(0, 5).map((skill) => (
-          <Box className={classes.skillsIcon}>
+        {profile.skills.slice(0, 5).map((skill, index) => (
+          <Box component="li" key={index} className={classes.skillsIcon}>
             <CheckOutlinedIcon />
             {skill.toUpperCase()}
           </Box>

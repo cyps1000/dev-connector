@@ -85,18 +85,20 @@ export const login =
       loadUser()(dispatch);
       dispatchAlert(["Successfully logged in!"], "success", 3000)(dispatch);
     } catch (err) {
-      const errors = err.response.data.errors;
+      if (err.response) {
+        const errors = err.response.data.errors;
 
-      dispatchAlert(
-        errors.map((err: { msg: any }) => err.msg),
-        "error",
-        3000
-      )(dispatch);
+        dispatchAlert(
+          errors.map((err: { msg: any }) => err.msg),
+          "error",
+          3000
+        )(dispatch);
 
-      dispatch({
-        type: LoginUserActionTypes.LOGIN_FAIL,
-        payload: errors
-      });
+        dispatch({
+          type: LoginUserActionTypes.LOGIN_FAIL,
+          payload: errors
+        });
+      }
     }
   };
 

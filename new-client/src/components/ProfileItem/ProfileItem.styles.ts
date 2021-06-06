@@ -16,42 +16,43 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: "2rem",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center"
   },
   avatar: {
     width: "7rem",
-    height: "7rem",
+    height: "7rem"
   },
   profileName: {
-    paddingTop: "1rem",
+    paddingTop: "1rem"
   },
   skills: {
     display: "flex",
     "& div": {
-      paddingRight: "1rem",
-      "& svg": {
-        color: "#fff",
-        marginRight: "0.2rem",
-      },
-    },
+      paddingRight: "1rem"
+    }
   },
   skillsIcon: {
     display: "flex",
     alignItems: "center",
+    paddingRight: "1rem",
+    "& svg": {
+      color: "#fff",
+      marginRight: "0.2rem"
+    }
   },
   viewProfileBtn: {
     marginTop: "1rem",
     backgroundColor: "#fff",
     "& a": {
       textDecoration: "none",
-      color: "inherit",
+      color: "inherit"
     },
     color: "#7074e4",
     "&:hover": {
       backgroundColor: "#5d61ce",
-      color: "#fff",
-    },
-  },
+      color: "#fff"
+    }
+  }
 }));
 
 export { useStyles };

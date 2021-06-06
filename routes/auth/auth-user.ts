@@ -13,14 +13,14 @@ import { PasswordManager } from "../../services/password-manager";
 import { User } from "../../models/User";
 
 /**
- * @route   POST api/users
+ * @route   POST api/auth
  * @desc    Authenticate user & get token
  * @access  Public
  */
 
 const requestValidation = [
   check("email", "Please include a valid email").isEmail(),
-  check("password", "Password is required").exists(),
+  check("password", "Password is required").exists()
 ];
 
 const loginUser = async (req: Request, res: Response) => {
@@ -54,14 +54,14 @@ const loginUser = async (req: Request, res: Response) => {
    * Defines the payload
    */
   const payload = {
-    id: user.id,
+    id: user.id
   };
 
   /**
    * Creates an access token
    */
   const jwtToken = jwt.sign(payload, process.env.JWT_SECRET!, {
-    expiresIn: 3600,
+    expiresIn: 3600
   });
   res.status(201).send({ token: jwtToken });
 };

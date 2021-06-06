@@ -84,9 +84,8 @@ const Navbar: React.FC = (props) => {
   const goToHome = () => routeTo("/");
   const goToLogin = () => routeTo("/login");
   const goToRegister = () => routeTo("/register");
-  const goToDevelopersPublic = () => routeTo("/profiles");
-  const goToDevelopers = () => routeTo("/dashboard/profiles");
-  const goToPosts = () => routeTo("/dashboard/posts");
+  const goToDevelopers = () => routeTo("/profiles");
+  const goToPosts = () => routeTo("/posts");
   const goToDashboard = () => routeTo("/dashboard");
 
   /**
@@ -119,17 +118,17 @@ const Navbar: React.FC = (props) => {
    */
   const guestLinks = (
     <Fragment>
-      <Button color="inherit" onClick={goToDevelopersPublic}>
+      <Button color="inherit" onClick={goToDevelopers}>
         <FontAwesomeIcon icon={faUsers} />
         Developers
       </Button>
       <Button color="inherit" onClick={goToRegister}>
         <FontAwesomeIcon icon={faUserPlus} />
-        Register
+        Sign Up
       </Button>
       <Button color="inherit" onClick={goToLogin}>
         <FontAwesomeIcon icon={faSignInAlt} />
-        Login
+        Sign In
       </Button>
     </Fragment>
   );
@@ -139,19 +138,19 @@ const Navbar: React.FC = (props) => {
    */
   const guestLinksMobile = (
     <List>
-      <ListItem button onClick={goToDevelopersPublic}>
+      <ListItem button onClick={goToDevelopers}>
         <FontAwesomeIcon icon={faUsers} />
         <ListItemText primary="Developers" />
       </ListItem>
       <Divider />
       <ListItem button onClick={goToRegister}>
         <FontAwesomeIcon icon={faUserPlus} />
-        <ListItemText primary="Register" />
+        <ListItemText primary="Sign Up" />
       </ListItem>
       <Divider />
       <ListItem button onClick={goToLogin}>
         <FontAwesomeIcon icon={faSignInAlt} />
-        <ListItemText primary="Login" />
+        <ListItemText primary="Sign In" />
       </ListItem>
       <Divider />
     </List>

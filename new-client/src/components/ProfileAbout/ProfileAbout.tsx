@@ -52,8 +52,8 @@ const ProfileAbout: React.FC<ProfileTopProps> = (props) => {
         Skill Set
       </Typography>
       <Typography className={classes.skills} gutterBottom color="textPrimary">
-        {profile.skills.slice(0, 5).map((skill) => (
-          <Box className={classes.skillsIcon}>
+        {profile.skills.slice(0, 5).map((skill, index) => (
+          <Box component="li" key={index} className={classes.skillsIcon}>
             <CheckOutlinedIcon />
             {skill.toUpperCase()}
           </Box>

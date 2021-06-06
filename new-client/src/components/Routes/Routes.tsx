@@ -4,10 +4,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 /**
  * Imports Components
  */
+import PrivateRoute from "./PrivateRoute";
 import Navbar from "../Navbar";
 import Alert from "../Alert";
-import PublicRoutes from "./PublicRoutes";
-import PrivateRoutes from "./PrivateRoutes";
+import Register from "../Register";
+import Login from "../Login";
+import Profiles from "../Profiles";
+import Profile from "../Profile";
+import Dashboard from "../Dashboard";
+import Landing from "../Landing";
+import Posts from "../Posts";
+import CreateProfile from "../CreateProfile";
 
 /**
  * Imports Utils
@@ -19,6 +26,10 @@ import { setAuthToken } from "../../utils";
  */
 import { useActions } from "../../hooks";
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 /**
  * Displays the component
  */
@@ -26,10 +37,7 @@ const Routes: React.FC = () => {
   const { loadUser } = useActions();
 
   useEffect(() => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-      loadUser();
-    }
+    loadUser();
     // eslint-disable-next-line
   }, []);
 
@@ -37,14 +45,22 @@ const Routes: React.FC = () => {
     <Router>
       <Navbar />
       <Alert />
-      <Switch>
-        <Route path="/dashboard">
-          <PrivateRoutes />
-        </Route>
-        <Route path="/">
-          <PublicRoutes />
-        </Route>
-      </Switch>
+      <Route path="/">
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/profiles" component={Profiles} />
+          <Route exact path="/profile/:id" component={Profile} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/posts" component={Posts} />
+          <PrivateRoute
+            exact
+            path="/create-profile"
+            component={CreateProfile}
+          />
+        </Switch>
+      </Route>
     </Router>
   );
 };

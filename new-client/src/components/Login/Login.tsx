@@ -1,5 +1,5 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 /**
  * Imports Material UI Components
@@ -16,7 +16,7 @@ import Container from "@material-ui/core/Container";
 /**
  * Imports Hooks
  */
-import { useActions } from "../../hooks";
+import { useActions, useTypedSelector } from "../../hooks";
 
 /**
  * Imports the component styles
@@ -29,11 +29,16 @@ const Login: React.FC = () => {
    */
   const classes = useStyles();
 
+  /**
+   * Init the auth state
+   */
+  const { isAuthenticated } = useTypedSelector((state) => state.auth);
+
   const { login } = useActions();
 
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
   const { email, password } = formData;
@@ -45,6 +50,13 @@ const Login: React.FC = () => {
     e.preventDefault();
     login(email, password);
   };
+
+  /**
+   * Redirect if logged in
+   */
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">

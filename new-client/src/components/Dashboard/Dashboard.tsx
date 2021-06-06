@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 /**
@@ -6,12 +6,22 @@ import { Link } from "react-router-dom";
  */
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+
+/**
+ * Imports Font Awesome Icons
+ */
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 /**
  * Imports Components
  */
 import Spinner from "../Spinner";
+import DashboardActions from "../DashboardActions";
+import Experience from "../Experience";
+import Education from "../Education";
 
 /**
  * Imports the component styles
@@ -71,17 +81,30 @@ const Dashboard: React.FC = () => {
         Dashboard
       </Typography>
       <Typography variant="h5" color="textPrimary" gutterBottom>
-        Welcome, {user && user.name.trim().split(" ")[0]}
+        <FontAwesomeIcon icon={faUser} className={classes.userIcon} />
+        Welcome, {user && user.name}
       </Typography>
       {profile !== null ? (
-        <Typography>shet to be added</Typography>
+        <Fragment>
+          <DashboardActions />
+          <Experience profile={profile} />
+          <Education profile={profile} />
+          <Box className={classes.deleteBtns}>
+            <Button variant="outlined" onClick={() => deleteAccount()}>
+              Delete Account
+            </Button>
+            <Button variant="outlined" onClick={() => deleteProfile()}>
+              Delete Profile
+            </Button>
+          </Box>
+        </Fragment>
       ) : (
         <div>
-          <Typography>
+          <Typography variant="h6" color="textPrimary" gutterBottom>
             You have not yet set up a profile, please add some info
           </Typography>
-          <Button variant="outlined">
-            <Link to="/dashboard/create-profile">Create Profile</Link>
+          <Button variant="outlined" className={classes.createProfileBtn}>
+            <Link to="/create-profile">Create Profile</Link>
           </Button>
         </div>
       )}
