@@ -15,6 +15,9 @@ import Dashboard from "../Dashboard";
 import Landing from "../Landing";
 import Posts from "../Posts";
 import CreateProfile from "../CreateProfile";
+import EditProfile from "../EditProfile";
+import AddExperience from "../AddExperience";
+import AddEducation from "../AddEducation";
 
 /**
  * Imports Utils
@@ -54,11 +57,19 @@ const Routes: React.FC = () => {
           <Route exact path="/profile/:id" component={Profile} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/posts" component={Posts} />
+          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
           <PrivateRoute
             exact
             path="/create-profile"
             component={CreateProfile}
           />
+
+          <PrivateRoute
+            exact
+            path="/add-experience"
+            component={AddExperience}
+          />
+          <PrivateRoute exact path="/add-education" component={AddEducation} />
         </Switch>
       </Route>
     </Router>

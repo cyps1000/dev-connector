@@ -16,9 +16,9 @@ export enum ProfileActionTypes {
  * Defines the interface for the Social links
  */
 interface SocialObject {
-  youtube: string | null;
+  youtube: string;
   facebook: string;
-  twitter: string | null;
+  twitter: string;
   instagram: string;
   linkedin: string;
 }

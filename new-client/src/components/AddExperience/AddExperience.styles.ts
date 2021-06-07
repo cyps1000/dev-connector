@@ -14,18 +14,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column"
   },
-  userIcon: {
+  expIcon: {
     marginRight: "0.5rem",
     color: "#3f51b5"
   },
-  toggleSocialsBtn: {
-    marginTop: "1rem",
-    marginBottom: "0.5rem",
-    backgroundColor: "#fff",
-    color: "#3f51b5",
-    "&:hover": {
-      backgroundColor: "#3f51b5",
-      color: "#fff"
+  form: {
+    marginTop: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    "& .MuiTextField-root": {
+      margin: "0.5rem",
+      width: "100ch"
     }
   },
   buttonsBox: {
@@ -46,40 +45,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: "#fff"
     }
   },
-  createProfileBtn: {
+  addExpBtn: {
     color: "#3f51b5",
     "&:hover": {
       backgroundColor: "#3f51b5",
       color: "#fff"
-    }
-  },
-  twitterIcon: {
-    color: "#1da1f2"
-  },
-  facebookIcon: {
-    color: "#1877f2"
-  },
-  linkedinIcon: {
-    color: "#0a66c2"
-  },
-  youtubeIcon: {
-    color: "#ff0000"
-  },
-  instagramIcon: {
-    color: "#f5c265"
-  },
-  socialInput: {
-    display: "flex",
-    "& svg": {
-      marginTop: "1.5rem",
-      marginRight: "1rem"
-    }
-  },
-  form: {
-    marginTop: theme.spacing(1),
-    "& .MuiTextField-root": {
-      margin: "0.5rem",
-      width: "100ch"
     }
   }
 }));

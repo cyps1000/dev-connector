@@ -1,4 +1,4 @@
-import { Fragment, useState, ChangeEvent, FormEvent } from "react";
+import { Fragment, useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 /**
@@ -27,24 +27,24 @@ import {
 /**
  * Imports the component styles
  */
-import { useStyles } from "./CreateProfile.styles";
+import { useStyles } from "./EditProfile.styles";
 
 /**
  * Imports Hooks
  */
-import { useActions } from "../../hooks";
+import { useActions, useTypedSelector } from "../../hooks";
 
 /**
  * Defines the props interface
  */
-export interface CreateProfileProps {
+export interface EditProfileProps {
   history?: History;
 }
 
 /**
  * Displays the component
  */
-const CreateProfile: React.FC<CreateProfileProps> = (props) => {
+const EditProfile: React.FC<EditProfileProps> = (props) => {
   const { history } = props;
 
   /**
@@ -53,9 +53,14 @@ const CreateProfile: React.FC<CreateProfileProps> = (props) => {
   const classes = useStyles();
 
   /**
-   * Handles creating the profile
+   * Handles creating and getting the profile
    */
-  const { createProfile } = useActions();
+  const { createProfile, getCurrentProfile } = useActions();
+
+  /**
+   * Handles getting the profile state
+   */
+  const { profile, loading } = useTypedSelector((state) => state.profile);
 
   /**
    * Defines the default state of the form
@@ -74,11 +79,6 @@ const CreateProfile: React.FC<CreateProfileProps> = (props) => {
     youtube: "",
     instagram: ""
   });
-
-  /**
-   * Handles showing/hiding the social inputs
-   */
-  const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   /**
    * Gets the values from formData
@@ -102,10 +102,6 @@ const CreateProfile: React.FC<CreateProfileProps> = (props) => {
    * Defines the default statuses
    */
   const statuses = [
-    {
-      value: "",
-      label: "* Select Professional Status"
-    },
     {
       value: "Developer",
       label: "Developer"
@@ -140,12 +136,38 @@ const CreateProfile: React.FC<CreateProfileProps> = (props) => {
     }
   ];
 
+  /**
+   * Handles showing/hiding the social inputs
+   */
+  const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
+  useEffect(() => {
+    getCurrentProfile();
+
+    setFormData({
+      company: loading || !profile?.company ? "" : profile.company,
+      website: loading || !profile?.website ? "" : profile.website,
+      location: loading || !profile?.location ? "" : profile.location,
+      status: loading || !profile?.status ? "" : profile.status,
+      skills: loading || !profile?.skills ? "" : profile.skills.join(","),
+      githubusername:
+        loading || !profile?.githubusername ? "" : profile.githubusername,
+      bio: loading || !profile?.bio ? "" : profile.bio,
+      twitter: loading || !profile?.social ? "" : profile.social.twitter,
+      facebook: loading || !profile?.social ? "" : profile.social.facebook,
+      linkedin: loading || !profile?.social ? "" : profile.social.linkedin,
+      youtube: loading || !profile?.social ? "" : profile.social.youtube,
+      instagram: loading || !profile?.social ? "" : profile.social.instagram
+    });
+    // eslint-disable-next-line
+  }, [loading, getCurrentProfile]);
+
   const onChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createProfile(formData, history);
+    createProfile(formData, history, true);
   };
 
   return (
@@ -165,7 +187,6 @@ const CreateProfile: React.FC<CreateProfileProps> = (props) => {
           label="* Select Professional Status"
           value={status}
           fullWidth
-          name="status"
           onChange={onChange}
           helperText="Give us an idea of where you are at in your career"
         >
@@ -352,4 +373,4 @@ const CreateProfile: React.FC<CreateProfileProps> = (props) => {
   );
 };
 
-export default CreateProfile;
+export default EditProfile;
