@@ -37,6 +37,11 @@ import { useActions, useTypedSelector } from "../../hooks";
  * Displays the component
  */
 const Dashboard: React.FC = () => {
+  useEffect(() => {
+    getCurrentProfile();
+    // eslint-disable-next-line
+  }, []);
+
   /**
    * Gets the component styles
    */
@@ -68,11 +73,6 @@ const Dashboard: React.FC = () => {
    */
   const { profile, loading } = useTypedSelector((state) => state.profile);
 
-  useEffect(() => {
-    getCurrentProfile();
-    // eslint-disable-next-line
-  }, []);
-
   return loading && profile === null ? (
     <Spinner />
   ) : (
@@ -99,14 +99,21 @@ const Dashboard: React.FC = () => {
           </Box>
         </Fragment>
       ) : (
-        <div>
+        <Box>
           <Typography variant="h6" color="textPrimary" gutterBottom>
             You have not yet set up a profile, please add some info
           </Typography>
           <Button variant="outlined" className={classes.createProfileBtn}>
             <Link to="/create-profile">Create Profile</Link>
           </Button>
-        </div>
+          <Button
+            variant="outlined"
+            className={classes.deleteBtn}
+            onClick={() => deleteAccount()}
+          >
+            Delete Account
+          </Button>
+        </Box>
       )}
     </Container>
   );

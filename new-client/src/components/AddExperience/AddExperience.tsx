@@ -125,7 +125,6 @@ const AddExperience: React.FC<AddExperienceProps> = (props) => {
           id="from"
           label="* From Date"
           type="date"
-          defaultValue="2017-05-24"
           name="from"
           value={from}
           InputLabelProps={{
@@ -153,7 +152,6 @@ const AddExperience: React.FC<AddExperienceProps> = (props) => {
           id="to"
           label="* To Date"
           type="date"
-          defaultValue="2017-05-24"
           name="to"
           value={to}
           InputLabelProps={{

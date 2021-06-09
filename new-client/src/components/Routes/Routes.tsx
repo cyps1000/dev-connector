@@ -14,6 +14,7 @@ import Profile from "../Profile";
 import Dashboard from "../Dashboard";
 import Landing from "../Landing";
 import Posts from "../Posts";
+import Post from "../Post";
 import CreateProfile from "../CreateProfile";
 import EditProfile from "../EditProfile";
 import AddExperience from "../AddExperience";
@@ -57,6 +58,7 @@ const Routes: React.FC = () => {
           <Route exact path="/profile/:id" component={Profile} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/posts" component={Posts} />
+          <PrivateRoute exact path="/posts/:id" component={Post} />
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
           <PrivateRoute
             exact

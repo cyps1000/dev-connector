@@ -24,6 +24,33 @@ interface RegisterBody {
 }
 
 /**
+ * Handles Loading the user data
+ */
+export const loadUser = () => async (dispatch: Dispatch<AuthUserAction>) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  try {
+    const { data } = await axios.get("/api/auth");
+
+    dispatch({
+      type: LoadUserActionTypes.USER_LOADED,
+      payload: data
+    });
+  } catch (err) {
+    if (err.response) {
+      const errors = err.response.data.errors;
+
+      dispatch({
+        type: LoadUserActionTypes.AUTH_ERROR,
+        payload: errors
+      });
+    }
+  }
+};
+
+/**
  * Handles Registering the user
  */
 export const register =
@@ -44,6 +71,7 @@ export const register =
         type: RegisterUserActionTypes.REGISTER_SUCCESS,
         payload: data
       });
+
       loadUser()(dispatch);
     } catch (err) {
       const errors = err.response.data.errors;
@@ -82,6 +110,7 @@ export const login =
         type: LoginUserActionTypes.LOGIN_SUCCESS,
         payload: data
       });
+
       loadUser()(dispatch);
       dispatchAlert(["Successfully logged in!"], "success", 3000)(dispatch);
     } catch (err) {
@@ -103,43 +132,16 @@ export const login =
   };
 
 /**
- * Handles Loading the user data
- */
-export const loadUser = () => async (dispatch: Dispatch<AuthUserAction>) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-
-  try {
-    const { data } = await axios.get("/api/auth");
-
-    dispatch({
-      type: LoadUserActionTypes.USER_LOADED,
-      payload: data
-    });
-  } catch (err) {
-    if (err.response) {
-      const errors = err.response.data.errors;
-
-      dispatch({
-        type: LoadUserActionTypes.AUTH_ERROR,
-        payload: errors
-      });
-    }
-  }
-};
-
-/**
  * Handles Logging out the user
  */
 export const logout = () => (dispatch: Dispatch<AuthUserAction>) => {
-  // dispatch({ type: ProfileActionTypes.CLEAR_PROFILE });
+  dispatch({ type: ProfileActionTypes.CLEAR_PROFILE });
   dispatch({ type: LogoutUserActionTypes.LOGOUT });
   dispatchAlert(["Logged out"], "success")(dispatch);
 };
 
 /**
- * Handles Deleting the Account, Posts, Commments **TO ADD: POSTS AND COMMENTS**
+ * Handles Deleting the Account
  */
 export const deleteAccount =
   () => async (dispatch: Dispatch<AuthUserAction>) => {

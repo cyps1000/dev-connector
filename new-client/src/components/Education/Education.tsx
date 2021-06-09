@@ -71,7 +71,7 @@ const Education: React.FC<EducationProps> = (props) => {
       <TableCell align="left">
         <Button
           className={classes.deleteButton}
-          onClick={() => deleteEducation(edu.id)}
+          onClick={() => deleteEducation(edu._id)}
         >
           Delete
         </Button>

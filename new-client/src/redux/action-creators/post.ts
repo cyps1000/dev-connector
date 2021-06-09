@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import axios from "axios";
 
 import { PostActionTypes } from "../types";
-import { PostAction, AddPostAction } from "../actions";
+import { PostAction } from "../actions";
 import { dispatchAlert } from "./alert";
 
 /**
@@ -11,6 +11,13 @@ import { dispatchAlert } from "./alert";
 interface PostFormData {
   text: string;
 }
+
+/**
+ * Handles clearing the posts
+ */
+const clearPost = () => async (dispatch: Dispatch<PostAction>) => {
+  dispatch({ type: PostActionTypes.CLEAR_POST });
+};
 
 /**
  * Handles getting all the posts
@@ -40,6 +47,8 @@ export const getPosts = () => async (dispatch: Dispatch<PostAction>) => {
  */
 export const getPostById =
   (id: string) => async (dispatch: Dispatch<PostAction>) => {
+    clearPost()(dispatch);
+
     try {
       const res = await axios.get(`/api/posts/${id}`);
 
@@ -78,7 +87,7 @@ export const addPost =
         payload: res.data
       });
 
-      //dispatchAlert(["Post created"], "success")(dispatch);
+      dispatchAlert(["Post created"], "success");
     } catch (err) {
       if (err.response) {
         const errors = err.response.data.errors;
@@ -96,23 +105,25 @@ export const addPost =
  */
 export const deletePost =
   (id: string) => async (dispatch: Dispatch<PostAction>) => {
-    try {
-      const res = await axios.delete(`/api/posts/${id}`);
-
-      dispatch({
-        type: PostActionTypes.DELETE_POST,
-        payload: id
-      });
-
-      // dispatchAlert(["Post removed"], "success")(dispatch);
-    } catch (err) {
-      if (err.response) {
-        const errors = err.response.data.errors;
+    if (window.confirm("Are you sure? This cannot be undone.")) {
+      try {
+        await axios.delete(`/api/posts/${id}`);
 
         dispatch({
-          type: PostActionTypes.POST_ERROR,
-          payload: errors
+          type: PostActionTypes.DELETE_POST,
+          payload: id
         });
+
+        dispatchAlert(["Post removed"], "success");
+      } catch (err) {
+        if (err.response) {
+          const errors = err.response.data.errors;
+
+          dispatch({
+            type: PostActionTypes.POST_ERROR,
+            payload: errors
+          });
+        }
       }
     }
   };
@@ -141,10 +152,16 @@ export const addComment =
         payload: res.data
       });
 
-      //dispatchAlert(["Comment Added"], "success")(dispatch);
+      dispatchAlert(["Comment Added"], "success");
     } catch (err) {
       if (err.response) {
         const errors = err.response.data.errors;
+
+        dispatchAlert(
+          errors.map((err: { msg: any }) => err.msg),
+          "error",
+          3000
+        )(dispatch);
 
         dispatch({
           type: PostActionTypes.POST_ERROR,
@@ -161,14 +178,16 @@ export const deleteComment =
   (postId: string, commentId: string) =>
   async (dispatch: Dispatch<PostAction>) => {
     try {
-      await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+      const res = await axios.delete(
+        `/api/posts/${postId}/comments/${commentId}`
+      );
 
       dispatch({
         type: PostActionTypes.REMOVE_COMMENT,
-        payload: commentId
+        payload: res.data
       });
 
-      //dispatchAlert(["Comment Removed"], "success")(dispatch);
+      dispatchAlert(["Comment Removed"], "success")(dispatch);
     } catch (err) {
       if (err.response) {
         const errors = err.response.data.errors;
@@ -191,7 +210,7 @@ export const addLike =
 
       dispatch({
         type: PostActionTypes.UPDATE_LIKES,
-        payload: res.data
+        payload: { id, likes: res.data }
       });
     } catch (err) {
       if (err.response) {
@@ -215,7 +234,7 @@ export const removeLike =
 
       dispatch({
         type: PostActionTypes.UPDATE_LIKES,
-        payload: res.data
+        payload: { id, likes: res.data }
       });
     } catch (err) {
       if (err.response) {

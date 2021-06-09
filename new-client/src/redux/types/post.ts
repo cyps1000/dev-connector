@@ -5,6 +5,7 @@ export enum PostActionTypes {
   GET_POSTS = "get_posts",
   GET_POST = "get_post",
   ADD_POST = "add_post",
+  CLEAR_POST = "clear_post",
   DELETE_POST = "delete_post",
   POST_ERROR = "post_error",
   UPDATE_LIKES = "update_likes",

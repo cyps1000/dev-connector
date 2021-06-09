@@ -1,3 +1,4 @@
+// @ts-nocheck
 import produce from "immer";
 
 import { PostActionTypes, PostPayload } from "../types";
@@ -47,7 +48,23 @@ const reducer = produce(
         state.loading = false;
         return state;
 
+      case PostActionTypes.CLEAR_POST:
+        state.post = null;
+        state.loading = false;
+        return state;
+
       case PostActionTypes.UPDATE_LIKES:
+        console.log("payload", action.payload);
+        const foundPost = state.posts.find(
+          (post) => post.id === action.payload.id
+        );
+        if (foundPost) {
+          foundPost.likes = action.payload.likes;
+        }
+        state.posts = state.posts.map((post) => {
+          if (post.id === action.payload.id) return { ...foundPost };
+          return post;
+        });
         state.post!.likes = action.payload.likes;
         state.loading = false;
         return state;

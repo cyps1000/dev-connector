@@ -13,7 +13,7 @@ import { Post } from "../../models/Post";
  */
 const getPosts = async (req: Request, res: Response) => {
   try {
-    const posts = await Post.find().sort({ date: -1 });
+    const posts = await Post.find().sort({ date: -1 }).populate("comments");
     res.json(posts);
   } catch (error) {
     console.error(error.message);

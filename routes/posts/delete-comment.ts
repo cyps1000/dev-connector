@@ -48,7 +48,7 @@ const deleteComment = async (req: Request, res: Response) => {
     await comment.remove();
 
     await post.save();
-    res.json(post.comments);
+    res.send(comment);
   } catch (error) {
     console.error(error.message);
     if (error.kind === "ObjectId") {

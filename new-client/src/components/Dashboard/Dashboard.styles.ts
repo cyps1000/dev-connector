@@ -32,6 +32,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       }
     }
   },
+  deleteBtn: {
+    marginTop: "0.5rem",
+    marginLeft: "1rem",
+    backgroundColor: "#fff",
+    color: "red",
+    "&:hover": {
+      backgroundColor: "red",
+      color: "#fff"
+    }
+  },
   createProfileBtn: {
     marginTop: "0.5rem",
     backgroundColor: "#fff",

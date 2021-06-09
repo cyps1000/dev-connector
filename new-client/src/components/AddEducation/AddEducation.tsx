@@ -126,7 +126,6 @@ const AddEducation: React.FC<AddEducationProps> = (props) => {
           id="from"
           label="* From Date"
           type="date"
-          defaultValue="2017-05-24"
           name="from"
           value={from}
           InputLabelProps={{
@@ -154,7 +153,6 @@ const AddEducation: React.FC<AddEducationProps> = (props) => {
           id="to"
           label="* To Date"
           type="date"
-          defaultValue="2017-05-24"
           name="to"
           value={to}
           InputLabelProps={{

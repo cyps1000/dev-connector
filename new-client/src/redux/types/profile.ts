@@ -37,7 +37,7 @@ interface User {
  * Defines the interface for Experience
  */
 export interface Experience {
-  id: string;
+  _id: string;
   current: boolean;
   title: string;
   company: string;
@@ -51,7 +51,7 @@ export interface Experience {
  * Defines the interface for Education
  */
 export interface Education {
-  id: string;
+  _id: string;
   current: boolean;
   school: string;
   degree: string;

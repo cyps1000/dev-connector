@@ -5,7 +5,7 @@ import {
   LoginUserActionTypes,
   LoadUserActionTypes,
   LogoutUserActionTypes,
-  LoadUser,
+  LoadUser
 } from "../types";
 import { AuthUserAction } from "../actions";
 
@@ -28,9 +28,9 @@ const initialState: AuthUsers = {
     email: "",
     avatar: "",
     date: "",
-    id: "",
+    id: ""
   },
-  errors: [],
+  errors: []
 };
 
 const reducer = produce(

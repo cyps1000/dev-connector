@@ -10,7 +10,6 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     marginTop: "7rem",
-    height: "110vh",
     display: "flex",
     flexDirection: "column"
   },

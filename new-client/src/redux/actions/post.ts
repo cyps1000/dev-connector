@@ -37,9 +37,16 @@ export interface AddPostAction {
  */
 export interface PostErrorAction {
   type: PostActionTypes.POST_ERROR;
-  payload: {
+  payload?: {
     msg: string;
   }[];
+}
+
+/**
+ * Defines the ClearPostAction interface
+ */
+export interface ClearPostAction {
+  type: PostActionTypes.CLEAR_POST;
 }
 
 /**
@@ -55,7 +62,7 @@ export interface AddCommentAction {
  */
 export interface DeleteCommentAction {
   type: PostActionTypes.REMOVE_COMMENT;
-  payload: string;
+  payload: Comment;
 }
 
 /**
@@ -65,6 +72,7 @@ export interface UpdateLikesAction {
   type: PostActionTypes.UPDATE_LIKES;
   payload: {
     likes: Like[];
+    id: string;
   };
 }
 
@@ -79,4 +87,5 @@ export type PostAction =
   | PostErrorAction
   | AddCommentAction
   | DeleteCommentAction
-  | UpdateLikesAction;
+  | UpdateLikesAction
+  | ClearPostAction;

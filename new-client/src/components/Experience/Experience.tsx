@@ -71,7 +71,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
       <TableCell align="left">
         <Button
           className={classes.deleteButton}
-          onClick={() => deleteExperience(exp.id)}
+          onClick={() => deleteExperience(exp._id)}
         >
           Delete
         </Button>
