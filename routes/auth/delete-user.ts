@@ -6,6 +6,7 @@ import { auth } from "../../middleware/auth";
  */
 import { Post } from "../../models/Post";
 import { User } from "../../models/User";
+import { Profile } from "../../models/Profile";
 import { Comment } from "../../models/Comment";
 
 /**
@@ -24,6 +25,11 @@ const deleteUser = async (req: Request, res: Response) => {
      * Remove user comments
      */
     await Comment.deleteMany({ user: req.currentUser!.id });
+
+    /**
+     * Remove user profile
+     */
+    await Profile.deleteMany({ user: req.currentUser!.id });
 
     /**
      * Remove user

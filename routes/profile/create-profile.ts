@@ -33,11 +33,7 @@ const createProfile = async (req: Request, res: Response) => {
     status,
     githubusername,
     skills,
-    youtube,
-    facebook,
-    twitter,
-    instagram,
-    linkedin,
+    social,
   } = req.body;
 
   const arrangedSkills = skills.split(",").map((skill: string) => skill.trim());
@@ -51,14 +47,8 @@ const createProfile = async (req: Request, res: Response) => {
     status,
     githubusername,
     skills: arrangedSkills,
-    social: {
-      youtube,
-      facebook,
-      twitter,
-      instagram,
-      linkedin,
-    },
-  } as ProfileAttributes;
+    social,
+  };
 
   try {
     let profile = await Profile.findOne({ user: req.currentUser!.id });

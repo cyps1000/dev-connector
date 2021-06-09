@@ -13,7 +13,7 @@ import { Post } from "../../models/Post";
  */
 const getPostById = async (req: Request, res: Response) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate("comments");
 
     if (!post) {
       return res.status(404).json({ msg: "Post not found" });

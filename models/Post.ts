@@ -40,40 +40,52 @@ interface PostModel extends mongoose.Model<PostDocument> {
 /**
  * Builds the Post schema
  */
-const postSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  text: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-  },
-  avatar: {
-    type: String,
-  },
-  likes: [
-    {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    },
-  ],
-  comments: [
-    {
+const postSchema = new mongoose.Schema(
+  {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment",
+      ref: "User"
     },
-  ],
-  date: {
-    type: Date,
-    default: Date.now,
+    text: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String
+    },
+    avatar: {
+      type: String
+    },
+    likes: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User"
+        }
+      }
+    ],
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment"
+      }
+    ],
+    date: {
+      type: Date,
+      default: Date.now
+    }
   },
-});
+  {
+    toJSON: {
+      versionKey: false,
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+      }
+    },
+    timestamps: true
+  }
+);
 
 postSchema.statics.build = (attributes: PostAttributes) => {
   return new Post(attributes);

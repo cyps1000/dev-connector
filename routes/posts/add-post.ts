@@ -25,14 +25,12 @@ const addPost = async (req: Request, res: Response) => {
     return res.status(400).json({ msg: "error roor" });
   }
 
-  console.log("currentUser", req.currentUser);
-
   try {
     const newPost = Post.build({
       text: req.body.text,
       name: req.currentUser!.name,
       avatar: req.currentUser!.avatar,
-      user: req.currentUser!.id,
+      user: req.currentUser!.id
     });
 
     const post = await newPost.save();
@@ -49,7 +47,7 @@ const addPost = async (req: Request, res: Response) => {
 const addPostController: RequestHandler[] = [
   auth,
   ...requestValidation,
-  addPost,
+  addPost
 ];
 
 export { addPostController };

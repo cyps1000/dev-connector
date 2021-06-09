@@ -16,7 +16,7 @@ import { Profile, Experience } from "../../models/Profile";
 const requestValidation = [
   check("title", "Title is required").not().isEmpty(),
   check("company", "Company is required").not().isEmpty(),
-  check("from", "From date is required").not().isEmpty(),
+  check("from", "From date is required").not().isEmpty()
 ];
 
 const addExperience = async (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ const addExperience = async (req: Request, res: Response) => {
     from,
     to,
     current,
-    description,
+    description
   };
 
   try {
@@ -64,7 +64,7 @@ const addExperience = async (req: Request, res: Response) => {
 const addExperienceController: RequestHandler[] = [
   ...requestValidation,
   auth,
-  addExperience,
+  addExperience
 ];
 
 export { addExperienceController };
