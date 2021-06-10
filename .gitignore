@@ -1,7 +1,6 @@
 node_modules/
 /client/node_modules
 /new-client/node_modules
-/client/build
 
 # misc
 .DS_Store
