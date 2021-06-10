@@ -15,7 +15,7 @@ import { Profile, ProfileAttributes } from "../../models/Profile";
 
 const requestValidation = [
   check("status", "Status is required").not().isEmpty(),
-  check("skills", "Skills is required").not().isEmpty(),
+  check("skills", "Skills is required").not().isEmpty()
 ];
 
 const createProfile = async (req: Request, res: Response) => {
@@ -33,7 +33,11 @@ const createProfile = async (req: Request, res: Response) => {
     status,
     githubusername,
     skills,
-    social,
+    youtube,
+    twitter,
+    facebook,
+    linkedin,
+    instagram
   } = req.body;
 
   const arrangedSkills = skills.split(",").map((skill: string) => skill.trim());
@@ -47,7 +51,7 @@ const createProfile = async (req: Request, res: Response) => {
     status,
     githubusername,
     skills: arrangedSkills,
-    social,
+    social: { youtube, twitter, facebook, linkedin, instagram }
   };
 
   try {
@@ -79,7 +83,7 @@ const createProfile = async (req: Request, res: Response) => {
 const createProfileController: RequestHandler[] = [
   ...requestValidation,
   auth,
-  createProfile,
+  createProfile
 ];
 
 export { createProfileController };
